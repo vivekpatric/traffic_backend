@@ -28,7 +28,19 @@ public class RouteHistoryService {
     public void save(RouteHistoryDto dto){
 
         User user = userContextService.getCurrentUser();
+        RouteHistory history = new RouteHistory();
+        history.setUser(user);
+        history.setSourceLat(dto.sourceLat);
+        history.setSourceLng(dto.sourceLng);
+        history.setDestLat(dto.destLat);
+        history.setDestLng(dto.destLng);
+        history.setDistanceKm(dto.distanceKm);
+        history.setDurationMin(dto.durationMin);
+        history.setTrafficEtaMin(dto.trafficEtaMin);
+        history.setTrafficLevel(dto.trafficLevel);
+        history.setCreatedAt(LocalDateTime.now());
 
+        repository.save(history);
         RouteSelectedEvent event = RouteSelectedEvent.builder()
                         .email(user.getEmail())
                                 .sourceLat(dto.sourceLat)
