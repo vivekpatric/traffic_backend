@@ -24,8 +24,10 @@ public class AuthController {
         String token = service.login(req);
         Cookie cookie = new Cookie("jwt",token);
         cookie.setHttpOnly(true);
+        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setMaxAge(86400);
+        cookie.setAttribute("SameSite","None");
         response.addCookie(cookie);
         return ResponseEntity.ok().build();
 
