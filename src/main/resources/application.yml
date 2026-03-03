@@ -11,4 +11,7 @@ spring:
         format_sql: true
   kafka:
     enabled: false
+server:
+  port: ${PORT:8080}
+
 
